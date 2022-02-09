@@ -47,6 +47,9 @@ newlines
 
 ## Reference
 
+* [Template Designer Documentation — Jinja Documentation (3.0.x)](https://jinja.palletsprojects.com/en/3.0.x/templates/)
+* [Escaped Characters | Character Productions | YAML Ain’t Markup Language (YAML™) revision 1.2.2](https://yaml.org/spec/1.2.2/#57-escaped-characters)  
+  Usage of escape sequences in YAML
 * [Ansible Template Tester](https://ansible.sivel.net/test/)  
   Useful utility to test how a Jinja2 template renders(with Ansible-specific filters)
 * [Jinja live parser](https://cryptic-cliffs-32040.herokuapp.com/)  
