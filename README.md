@@ -1,6 +1,6 @@
 # Ansible problem where merging newline-including string list using join filter creates string with literal newline escape sequence
 
-A confusing problem that is tripled by Ansible, YAML, Python, and Jinja.
+A confusing problem that is quadrupled by YAML, Ansible, Python, and Jinja.
 
 ## Reference
 
