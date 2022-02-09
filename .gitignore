@@ -85,3 +85,6 @@
 
 # 不追蹤第三方 Ansible 收藏
 #/playbooks/collections/*/
+
+# Don't track generated templates
+*.txt

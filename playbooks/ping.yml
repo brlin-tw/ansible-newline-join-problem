@@ -1,7 +1,0 @@
----
-- name: 檢查設備清單內的被控節點(managed nodes)是否都可以被連線
-  hosts: all
-  gather_facts: False
-  tasks:
-    - name: 檢查被控端是否可以連接
-      ping:

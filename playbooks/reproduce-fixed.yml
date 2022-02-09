@@ -1,0 +1,35 @@
+- name: Reproduce problem with fixed playbook
+  hosts: localhost
+  gather_facts: False
+  vars:
+    input: [
+      "line\nwith\nnewlines",
+      "line\nwith\nnewlines",
+      "line\nwith\nnewlines"
+    ]
+  tasks:
+    - name: Check input in Ansible(var)
+      debug:
+        var: input
+
+    - name: Check input in Ansible(msg)
+      debug:
+        msg: '{{ input }}'
+
+    - name: Set fact of the join result
+      set_fact:
+        output: "{{ input | join(\"\n\") }}"
+
+    - name: Check output in Ansible(var)
+      debug:
+        var: output
+
+    - name: Check output in Ansible(msg)
+      debug:
+        msg: '{{ output }}'
+
+    - name: Generate output from template
+      delegate_to: localhost
+      template:
+        src: template.yml.j2
+        dest: '{{ lookup("env", "PWD") }}/rendered-template-fixed.txt'

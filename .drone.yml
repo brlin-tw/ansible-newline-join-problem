@@ -6,25 +6,6 @@ clone:
   skip_verify: true
 
 steps:
-  - name: 抓取 Git 標籤
-    image: alpine/git
-    # 讓持續整合也能在本地運行（容器中無使用者 SSH 私鑰）
-    failure: ignore
-    commands:
-      - GIT_SSL_NO_VERIFY= git fetch --tags
-
-  - name: 抓取 Git 子模組
-    image: alpine/git
-    # 讓持續整合也能在本地運行（容器中無使用者 SSH 私鑰）
-    failure: ignore
-    commands:
-      - GIT_SSL_NO_VERIFY= git submodule update --init
-
-  - name: 抓取 Ansible 依賴資源
-    image: alpine:3.12
-    commands:
-      - ./持續整合/fetch-ansible-requirements.sh
-
   - name: 靜態代碼分析
     depends_on:
       - 抓取 Git 標籤
@@ -32,52 +13,3 @@ steps:
     image: alpine:3.12
     commands:
       - ./持續整合/static-code-analysis.sh
-
-  - name: 產生並交付釋出的軟體
-    depends_on:
-      - 抓取 Git 標籤
-      - 抓取 Git 子模組
-      - 抓取 Ansible 依賴資源
-    when:
-      event:
-        #- push
-        - tag
-    image: alpine:3.14
-    environment:
-      GITLAB_AUTH_TOKEN:
-        from_secret: gitlab_auth_token
-    commands:
-      - apk add bash
-      - ./持續整合/deliver-built-artifacts.sh
-
-  - name: 發送持續整合結果到告警頻道
-    event:
-      - push
-      - pull_request
-    when:
-      status:
-        - success
-        - failure
-    depends_on:
-      - 靜態代碼分析
-    image: appleboy/drone-telegram
-    settings:
-      token:
-        from_secret: telegram_bot_auth_token
-      to: -1001613731358
-      format: Markdown
-      # 偽陽性檢查結果：行長度無法輕易縮減
-      # yamllint disable rule:line-length
-      message: |-
-        **{{#success build.status}}✅ 持續整合(CI)通過**{{else}}❌ 持續整合(CI)不通過，請盡快修正問題{{/success}}**
-
-        📖專案：{{repo.namespace}}/{{repo.name}}
-        🎋分支：{{commit.branch}}
-        👤作者：{{commit.author}}
-        ✒️修訂版：{{truncate commit.sha 8}}
-
-        ```
-        {{commit.message}}
-        ```
-        ⏲️花費時間：{{since build.started}}
-        🌐報告連結：{{build.link}}
