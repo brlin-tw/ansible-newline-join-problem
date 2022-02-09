@@ -1,0 +1,15 @@
+# Git 路徑屬性配置檔
+# 編輯參考
+#   - Git - gitattributes Documentation
+#     https://git-scm.com/docs/gitattributes
+
+# 於佈署包中排除開發中才有用的檔案
+.* export-ignore
+.editorconfig -export-ignore
+/持續整合/ export-ignore
+/持續整合/** export-ignore
+/Vagrantfile export-ignore
+/vagrant-assets/ export-ignore
+/vagrant-assets/** export-ignore
+
+# Git大檔案存儲(Git Large File Storage)規則

@@ -1,0 +1,70 @@
+# pre-commit 配置檔
+#
+# 編輯參考：
+#
+# * Adding pre-commit plugins to your project | pre-commit
+#   https://pre-commit.com/#adding-pre-commit-plugins-to-your-project
+# * Supported hooks | pre-commit
+#   https://pre-commit.com/hooks.html
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.4.0
+    hooks:
+      # 檢查行尾是否有冗餘的空白字元
+      # https://github.com/pre-commit/pre-commit-hooks#trailing-whitespace
+      - id: trailing-whitespace
+        args:
+          - --markdown-linebreak-ext=md,markdown
+        exclude: '.*\.patch$'
+      # 檢查檔案末尾是否有且只有一個換行序列
+      # https://github.com/pre-commit/pre-commit-hooks#end-of-file-fixer
+      - id: end-of-file-fixer
+      # 檢查 YAML 文件語法正確性
+      # https://github.com/pre-commit/pre-commit-hooks#check-yaml
+      - id: check-yaml
+      # 檢查是否在提交中加入不適合版控的大檔案
+      # https://github.com/pre-commit/pre-commit-hooks#check-added-large-files
+      - id: check-added-large-files
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.23.2
+    hooks:
+      # 檢查 Markdown 文件的潛在問題
+      # https://github.com/igorshubovych/markdownlint-cli#use-with-pre-commit
+      - id: markdownlint
+
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 2.1.5
+    hooks:
+      # 檢查 Shell 腳本的潛在問題
+      # https://github.com/jumanjihouse/pre-commit-hooks#shellcheck
+      - id: shellcheck
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.26.1
+    hooks:
+      # 檢查 YAML 文件的潛在問題
+      # https://yamllint.readthedocs.io/en/stable/integration.html#integration-with-pre-commit
+      - id: yamllint
+
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 2.4.0
+    hooks:
+      # 檢查 EditorConfig 規則合規性
+      # https://github.com/editorconfig-checker/editorconfig-checker.python#usage-with-the-pre-commit-git-hooks-framework
+      - id: editorconfig-checker
+        exclude: |
+          (?x)((
+            .key|
+            .crt|
+            .pem
+            )$
+          )
+
+  - repo: https://github.com/ansible/ansible-lint.git
+    rev: v5.3.2
+    hooks:
+      # 檢查 Ansible 劇本的潛在問題
+      # https://ansible-lint.readthedocs.io/en/latest/configuring.html#pre-commit-setup
+      - id: ansible-lint
+        files: \.(yaml|yml)$

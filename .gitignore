@@ -1,0 +1,87 @@
+# Git版本控制系統的追蹤排除規則
+# https://git-scm.com/docs/gitignore
+
+# 不追蹤非例外的Unix系統隱藏檔跟目錄
+.*
+
+# 追蹤Git的專案專屬設定（如 .gitattributes 跟 .gitconfig）
+!.git*
+
+# 追蹤 EditorConfig 的配置檔
+# https://editorconfig.org/
+!.editorconfig
+
+# 追蹤 Markdownlint（node.js版本）的配置檔
+# https://github.com/DavidAnson/markdownlint
+!/.markdownlint.*
+
+# 追蹤 Markdownlint（Ruby版本）的配置檔
+# https://github.com/DavidAnson/markdownlint
+!/.mdl*
+
+# 追蹤 Drone CI 的配置檔
+# https://docs.drone.io/
+!/.drone.yml
+
+# 追蹤 pre-commit 的配置檔
+# https://pre-commit.com/
+!/.pre-commit-config.yaml
+
+# 追蹤 Ansible Lint 的配置檔
+# https://github.com/ansible-community/ansible-lint
+!/.ansible-lint
+
+# 追蹤 yamllint 的配置檔
+# https://yamllint.readthedocs.io
+!/.yamllint
+
+# 不追蹤常見備份檔
+*~
+*.bak
+*.backup*
+*.bk*
+*.old
+*.orig
+*.swp
+
+# 不追蹤Tar封存檔
+*.tar*
+
+# 不追蹤常見壓縮檔
+*.7z
+*.bz2
+*.gz
+*.xz
+*.zip
+
+# 不追蹤doc-assets目錄以外的常見圖片檔
+*.bmp
+*.jpg
+*.png
+!doc-assets/*
+
+# 不追蹤Markdown的匯出文件格式
+*.doc?
+*.pdf
+
+# 不追蹤程式輸出常見副檔名
+*.err
+*.error
+*.log
+*.out
+*.output
+
+# 不追蹤編譯後的 Python 代碼快取
+*.pyc
+
+# 忽略 Ansible 快取目錄
+/.cache/
+
+# 忽略 Vagrant 環境依賴目錄
+/.vagrant/
+
+# 不追蹤第三方 Ansible 角色
+#/playbooks/roles/*.*/
+
+# 不追蹤第三方 Ansible 收藏
+#/playbooks/collections/*/

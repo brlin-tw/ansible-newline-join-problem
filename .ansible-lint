@@ -1,0 +1,12 @@
+# Ansible Lint 設定檔
+# https://docs.ansible.com/ansible-lint/configuring/configuring.html#configuration-file
+
+# 要排除的路徑
+exclude_paths:
+  - .cache/
+  #- playbooks/roles/
+
+# 要略過的規則
+# https://docs.ansible.com/ansible-lint/rules/default_rules.html
+#skip_list:
+  #- line-length

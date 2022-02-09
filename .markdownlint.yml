@@ -1,0 +1,47 @@
+# Markdownlint(Node.js) 的配置檔
+# https://github.com/igorshubovych/markdownlint-cli#configuration
+
+# 繼承 Markdownlint 官方規則
+default: True
+
+# 只允許一致的無序清單項目符號（不同階層可使用不同但一致的項目符號）
+MD004:
+  style: sublist
+
+# 允許 4 倍空白字元作為多層無序清單的縮排單位
+MD007:
+  indent: 4
+
+# 允許後綴 2 空白字元作為斷行序列
+MD009:
+  br_spaces: 2
+
+# 允許每行有最多 120 個字元；行字元數限制不套用至代碼區塊(code block)跟表格語法
+# 禁用：因無法於中文情境避免觸發此規則禁用
+# MD013:
+#   line_length: 120
+#   code_blocks: False
+#   tables: False
+MD013: False
+
+# 允許標題語法後不間隔一空行接續內文
+MD022: False
+
+# 允許非同一親節點下的標題重複
+MD024:
+  siblings_only: True
+
+# 允許清單與清單之上下文之間不見隔一空行
+MD032: False
+
+# 允許使用原生 HTML 標記，作為標題/表格內文沒有換行語法的迴避方案
+MD033: False
+
+# 禁用：有偽陽性檢測結果
+# MD037/no-space-in-emphasis reported when underscore contained within
+# emphasis · Issue #324 · DavidAnson/markdownlint
+# https://github.com/DavidAnson/markdownlint/issues/324
+MD037: False
+
+# 允許代碼區塊無語言提示標記，不是每個情境都適合加這個
+MD040: False

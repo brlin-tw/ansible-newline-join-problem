@@ -1,0 +1,37 @@
+# EditorConfig is awesome: https://EditorConfig.org
+# Property reference: https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{diff,patch}]
+# 避免損壞 patch 檔
+trim_trailing_whitespace = false
+
+# Avoid git patch fail to apply due to stripped unmodified lines that contains only spaces
+[/.git/**]
+trim_trailing_whitespace = false
+
+# Git configuration files uses tab characters as indentation unit
+[/.git*]
+indent_style = tab
+
+[*.{md,mkd,mkdn,markdown}]
+# 於 Markdown 中行尾雙空白字元為換行語法
+trim_trailing_whitespace = false
+
+# 不使用 EditorConfig 檢查 Markdown 文件的縮排寬度
+# （硬換行標記後無法跟清單標項目符號造成的行首位移對齊，改使用 Markdownlint 來檢查）
+indent_size = unset
+
+[*.{yml,yaml,yamllint,ansible-lint}]
+indent_size = 2
+
+[Vagrantfile]
+indent_size = 2
