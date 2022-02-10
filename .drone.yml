@@ -7,9 +7,6 @@ clone:
 
 steps:
   - name: 靜態代碼分析
-    depends_on:
-      - 抓取 Git 標籤
-      - 抓取 Ansible 依賴資源
     image: alpine:3.12
     commands:
       - ./持續整合/static-code-analysis.sh
